@@ -1,7 +1,15 @@
 /* src/styles.css */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* prevent global scroll */
+  font-family: 'Segoe UI', sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
 }
 
 nav {
@@ -19,8 +27,19 @@ nav a:hover {
   text-decoration: underline;
 }
 
-main {
-  /* padding: 20px; */
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden; /* no scroll on layout */
+}
+
+/* Main content grows and is scrollable only if needed */
+.main-content {
+  /* flex-grow: 1; */
+  overflow: hidden; /* no scroll unless you enable it inside subcontainers */
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
@@ -134,14 +153,15 @@ main {
 }
 
 .date-filter {
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 6px;
-  margin-bottom: 20px;
+  margin-top: 20px;
   max-width: 100%;
   display: flex;
   gap: 64px;
   justify-content: center;
   align-items: center;
+  height: 10%;
 }
 
 .date-filter label {
@@ -179,12 +199,98 @@ main {
   display: flex;
   justify-content: center;
   gap: 6px;
+  height:max-content;
 }
 
 .home-page-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content:space-between;
   align-items: center;
-  background-color: #0056b3;
   height: 100%;
+}
+.home-page-card-container{
+  padding: 10px;
+  height: 79%;
+}
+
+.card-container {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;            /* Allow wrapping to next row */
+  gap: 16px;
+  width: 100%;
+  overflow-y: auto;           /* Vertical scroll */
+  max-height: 80vh;           /* Adjust based on your layout */
+  padding-bottom: 10px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  justify-content: flex-start; /* Align cards to the left */
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 350px;
+  height: auto; /* Remove fixed height */
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: space-between; /* Distribute space evenly between elements */
+}
+
+.card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limits to 2 lines */
+  -webkit-box-orient: vertical;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px; /* Push buttons to the bottom */
+}
+
+
+.button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.button.view {
+  background-color: #2563eb; /* blue */
+}
+
+.button.edit {
+  background-color: #f59e0b; /* yellow */
+}
+
+.button.delete {
+  background-color: #dc2626; /* red */
 }
