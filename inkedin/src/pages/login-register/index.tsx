@@ -7,6 +7,7 @@ import loginBgImage from "../../assets/login.png";
 import { ArrowRight } from "@mynaui/icons-react";
 import { API_ENDPOINTS } from "../../constants/api.constants";
 import { api } from "../../configs/axios.config";
+import decodeJwt from "../../utils/jwtdecoder";
 
 
 const LoginScreen = () => {
@@ -72,7 +73,8 @@ const LoginScreen = () => {
         headers: {}
       })
       if (response.data.exception == null) {
-        login(response.data.responseData.token);
+        const user = decodeJwt(response.data.responseData.token ?? "")
+        login(response.data.responseData.token, user);
       }
       else {
         alert(response.data.responseMessage)

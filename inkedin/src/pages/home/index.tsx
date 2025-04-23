@@ -41,7 +41,7 @@ const HomeScreen = () => {
               title={blog.title}
               description={blog.description}
               imgURL={blog.image_url}
-              isEditable={true}
+              isEditable={blog.user_id == authState.user.id ? true : false}
               onCardClick={() => navigate(APP_ROUTES.BLOG, { state: { ...blog } })}
             />
           </div>
