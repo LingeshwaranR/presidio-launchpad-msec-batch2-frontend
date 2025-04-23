@@ -26,6 +26,10 @@
     justify-items: center;
 }
 
+.loginForm h2{
+    margin-bottom: 3rem;
+}
+
 /* Style for input groups */
 .inputGroup {
     width: 20rem;
@@ -37,7 +41,8 @@
     display: block;
     font-size: 0.9rem;
     margin-bottom: 8px;
-    color: #ceb6a0cb;
+    color: #f6e8dbcb;
+    letter-spacing: 0.06rem;
 }
 
 
@@ -66,7 +71,7 @@
     font-size: 1.1rem;
     border: none;
     border-radius: 8px; 
-    background-color: #91653d;
+    background-color: #eeb37b;
     color: #ffffff;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -84,7 +89,7 @@
     justify-content: center; 
     gap: 8px;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 900;
     color: #000000;
 }
 

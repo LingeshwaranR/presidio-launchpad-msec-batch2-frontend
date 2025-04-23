@@ -18,7 +18,7 @@ export const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <div className="navbar-logo">InkedIn</div>
+        <div className="navbar-logo">inkedIn</div>
       </div>
 
       <div className={`navbar-center ${menuOpen ? "active" : ""}`}>

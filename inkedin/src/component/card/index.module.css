@@ -1,0 +1,99 @@
+.cardWrapper {
+    width: 20rem;
+    height: 25.5rem;
+    background-color: white;
+    border-radius: 16px;
+    border: #dedddd solid 0.1rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 22px rgba(96, 96, 96, 0.15);
+  }
+  
+
+.cardImage {
+    height: 12rem;
+    width: 100%;
+}
+
+.cardImage img {
+    height: 100%;
+    width: 100%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.cardContent {
+    padding: 0 1rem;
+    flex-grow: 1;
+}
+
+.cardDescription p{
+    line-height: 1.5rem;
+    font-weight: 100;
+    color: rgb(75, 83, 90);
+    word-break: break-all;
+}
+
+.cardAction {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardEditViewAction {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.cardEditButton {
+    border: none;
+    border-radius: 4px; 
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #000000;
+    justify-content: space-between;
+    padding: 0.4rem 0.6rem;
+    background-color: rgb(255, 138, 5);
+    letter-spacing: 0.03rem
+}
+
+.cardViewButton {
+    border: none;
+    border-radius: 4px; 
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #ffffff;
+    justify-content: space-between;
+    padding: 0.4rem 0.6rem;
+    background-color: rgb(0, 0, 0);
+    letter-spacing: 0.03rem
+}
+
+.cardEditButton:hover{
+    background-color: rgb(255, 166, 1);
+    cursor: pointer;
+}
+
+.cardViewButton:hover {
+    cursor: pointer;
+}
+
+.cardEditIcon {
+    margin-top: 3px;
+}
+
+.cardFavIcon:hover {
+    cursor: pointer;
+}
+
+.cardBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }

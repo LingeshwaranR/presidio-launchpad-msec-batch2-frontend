@@ -6,6 +6,7 @@ import LoginScreen from "../pages/login-register/index";
 import { lazy } from "react";
 
 const HomeScreen = lazy(() => import("../pages/home/index"));
+const BlogScreen = lazy(() => import("../pages/blog/index"));
 
 // Application routes configuration
 export const ROUTE_CONFIG = [
@@ -16,7 +17,8 @@ export const ROUTE_CONFIG = [
     redirectTo: APP_ROUTES.HOME,
     children: [
         { path: APP_ROUTES.ROOT, element: HomeScreen },
-        { path: APP_ROUTES.HOME, element: HomeScreen }
+        { path: APP_ROUTES.HOME, element: HomeScreen },
+        { path: APP_ROUTES.BLOG, element: BlogScreen }
     ],
   },
   {
