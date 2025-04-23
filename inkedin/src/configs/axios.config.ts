@@ -19,14 +19,11 @@ export const api = {
     config: AxiosRequestConfig,
   ): Promise<AxiosResponse<T>> => apiClient.post(endpoint, body, config),
 
-  put: <T, B>(endpoint: string, body: B): Promise<AxiosResponse<T>> =>
-    apiClient.put(endpoint, body),
-
-  patch: <T, B>(
+  put: <T, B>(
     endpoint: string,
     body?: B,
     config?: AxiosRequestConfig,
-  ): Promise<AxiosResponse<T>> => apiClient.patch(endpoint, body, config),
+  ): Promise<AxiosResponse<T>> => apiClient.put(endpoint, body, config),
 
   delete: <T>(endpoint: string): Promise<AxiosResponse<T>> =>
     apiClient.delete(endpoint),

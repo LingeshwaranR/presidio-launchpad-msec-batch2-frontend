@@ -36,12 +36,13 @@ const HomeScreen = () => {
       <div className={styles.container}>
       {blogs.map((blog) => {
         return (
-          <div className={styles.cardsBody}>
+          <div key={blog.id} className={styles.cardsBody}>
             <CardComponent 
               title={blog.title}
               description={blog.description}
               imgURL={blog.image_url}
               isEditable={true}
+              onCardClick={() => navigate(APP_ROUTES.BLOG, { state: { ...blog } })}
             />
           </div>
         )

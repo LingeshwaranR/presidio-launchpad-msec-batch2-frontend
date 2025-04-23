@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { api } from "../../configs/axios.config";
 import { useAuth } from "../../context/auth/auth.context";
 import { API_ENDPOINTS } from "../../constants/api.constants";
 import { IBlog } from "../../types/app.type";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../constants/route.constant";
 
 const BlogScreen = () => {
@@ -15,6 +15,17 @@ const BlogScreen = () => {
   const [image_url, setimage_url] = useState("");
   const [errors, setErrors] = useState<{ title?: string; description?: string; content?: string; image_url?: string }>({});
   const navigate = useNavigate()
+  const location = useLocation();
+  const { id: blogId, title: blogTitle, description: blogDescription, content: blogContent, image_url: blogImageUrl } = location.state || {};
+
+  useEffect(() => {
+    if (blogTitle && blogDescription && blogContent && blogImageUrl) {
+      setTitle(blogTitle);
+      setDescription(blogDescription);
+      setContent(blogContent);
+      setimage_url(blogImageUrl);
+    }
+  }, [blogTitle, blogDescription, blogContent, blogImageUrl])
 
   const handleSubmit = async () => {
     const newErrors: { title?: string; description?: string; content?: string; image_url?: string } = {};
@@ -36,19 +47,26 @@ const BlogScreen = () => {
       content,
       image_url,
     };
-    console.log("Submitting blog:", blogData);
+    if (location.state) {
+      const updateBlog = await api.put<IBlog, IBlog>(API_ENDPOINTS.PUBLISH_BLOG+"/"+blogId, blogData, {
+        headers: {
+          Authorization: `Bearer ${authState.authToken}`,
+        }
+      })
+      navigate(APP_ROUTES.HOME)
+      return
+    }
     const publishBlog = await api.post<IBlog, IBlog>(API_ENDPOINTS.PUBLISH_BLOG, blogData, {
       headers: {
         Authorization: `Bearer ${authState.authToken}`,
       }
     })
-    console.log(publishBlog)
     navigate(APP_ROUTES.HOME)
   };
 
   return (
     <div className={styles.blogWrapper}>
-      <h1 className={styles.heading}>Write a New Blog</h1>
+      <h1 className={styles.heading}>{location.state ? "Make Changes to your Blog...." : "Write a New Blog"}</h1>
       <div className={styles.form}>
         <div className={styles.inputGroup}>
           <label>Title</label>
@@ -70,7 +88,7 @@ const BlogScreen = () => {
           <input value={image_url} onChange={(e) => setimage_url(e.target.value)} placeholder="https://example.com/image.jpg" />
           <div>{errors.image_url && <span className={styles.errorText}>{errors.image_url}</span>}</div>
         </div>
-        <button className={styles.submitButton} onClick={handleSubmit}>Publish</button>
+        <button className={styles.submitButton} onClick={handleSubmit}>{location.state ? "Save Changes" : "Publish"}</button>
       </div>
     </div>
   );

@@ -98,7 +98,7 @@ const LoginScreen = () => {
                 onChange={(e) => handleEmailChange(e.target.value)}
                 value={email}
               />
-              <div>{errors.email && <span className={styles.errorText}>{errors.email}</span>}</div>
+              <div className={styles.errorText}>{errors.email && <span>{errors.email}</span>}</div>
             </div>
  
             <div className={styles.inputGroup}>
@@ -110,7 +110,7 @@ const LoginScreen = () => {
                 onChange={(e) => handlePasswordChange(e.target.value)}
                 value={password}
               />
-              <div>{errors.password && <span className={styles.errorText}>{errors.password}</span>}</div>
+              <div className={styles.errorText}>{errors.password && <span className={styles.errorText}>{errors.password}</span>}</div>
             </div>
             <button type="button" onClick={handleLogin} className={styles.loginButton}>
               <div className={styles.loginButtonText}>

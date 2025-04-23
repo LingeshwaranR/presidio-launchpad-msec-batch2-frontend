@@ -7,8 +7,12 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 22px rgba(96, 96, 96, 0.15);
-  }
-  
+}
+
+.cardWrapper:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+}
 
 .cardImage {
     height: 12rem;

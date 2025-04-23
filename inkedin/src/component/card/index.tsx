@@ -7,13 +7,15 @@ interface CardProps {
   description: string;
   imgURL: string;
   isEditable: boolean;
+  onCardClick?: () => void;
 }
 
 const CardComponent: React.FC<CardProps> = ({
   title,
   description,
   imgURL,
-  isEditable
+  isEditable,
+  onCardClick
 }) => {
     const [fill, setFill] = useState<boolean>(false)
     const handleFavoriteClick = () => {
@@ -28,11 +30,11 @@ const CardComponent: React.FC<CardProps> = ({
     };
   return (
     <div className={styles.cardWrapper}>
-      <div className={styles.cardImage}>
+      <div className={styles.cardImage} onClick={onCardClick}>
         <img src={imgURL} alt="cardImage" />
       </div>
       <div className={styles.cardBody}>
-      <div className={styles.cardContent}>
+      <div className={styles.cardContent} onClick={onCardClick}>
         <div className={styles.cardTitle}>
             <h3>{title}</h3>
         </div>
@@ -40,7 +42,7 @@ const CardComponent: React.FC<CardProps> = ({
             <p>{description}</p>
         </div>
       </div>
-      <div className={styles.cardAction}>
+      <div className={styles.cardAction} onClick={() => {}}>
         <div className={styles.cardEditViewAction}>
             {isEditable && (
             <button className={styles.cardEditButton} onClick={handleEditClick}>
