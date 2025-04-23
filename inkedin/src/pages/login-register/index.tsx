@@ -14,7 +14,7 @@ const LoginScreen = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{ email?: string; password?: string; login?: string }>({});
 
   const handleEmailChange = (email: string) => {
     setEmail(email)
@@ -24,7 +24,6 @@ const LoginScreen = () => {
     setPassword(password)
   }
 
-  console.log(authState.isAuthenticated)
   interface ILoginRequest {
     email: string;
     password: string;
@@ -68,11 +67,20 @@ const LoginScreen = () => {
       email: email,
       password: password
     }
-    const response = await api.post<ILoginResponse, ILoginRequest>(API_ENDPOINTS.LOGIN, payload, {
-      headers: {}
-    })
-    console.log(response.data.responseMessage)
-    login(response.data.responseData.token);
+    try {
+      const response = await api.post<ILoginResponse, ILoginRequest>(API_ENDPOINTS.LOGIN, payload, {
+        headers: {}
+      })
+      if (response.data.exception == null) {
+        login(response.data.responseData.token);
+      }
+      else {
+        alert(response.data.responseMessage)
+      }
+    } catch {
+      const loginError = {login: "Invalid Credentials. Please try again."}
+      setErrors(loginError)
+    }
   };
 
   return (
@@ -80,7 +88,7 @@ const LoginScreen = () => {
       <div className={styles.loginFormWrapper}>
         <div className={styles.loginForm}>
           <form>
-            <h1>Welcome Back</h1>
+            <h2>Welcome Back to inkedin</h2>
             <div className={styles.inputGroup}>
               <label htmlFor="email">Enter Email ID</label>
               <input
@@ -90,9 +98,9 @@ const LoginScreen = () => {
                 onChange={(e) => handleEmailChange(e.target.value)}
                 value={email}
               />
-              {errors.email && <span className={styles.errorText}>{errors.email}</span>}
+              <div>{errors.email && <span className={styles.errorText}>{errors.email}</span>}</div>
             </div>
-
+ 
             <div className={styles.inputGroup}>
               <label htmlFor="password">Enter Password</label>
               <input
@@ -102,21 +110,21 @@ const LoginScreen = () => {
                 onChange={(e) => handlePasswordChange(e.target.value)}
                 value={password}
               />
-              {errors.password && <span className={styles.errorText}>{errors.password}</span>}
+              <div>{errors.password && <span className={styles.errorText}>{errors.password}</span>}</div>
             </div>
-
             <button type="button" onClick={handleLogin} className={styles.loginButton}>
               <div className={styles.loginButtonText}>
                 <div>Log In</div>
                 <ArrowRight size={24}/>
               </div>
-              </button>
+            </button>
+            <div className={styles.loginErrorText}>{errors.login && <span className={styles.errorText}>{errors.login}</span>}</div>
           </form>
         </div>
       </div>
-    <div className={styles.loginImage}>
-      <img src={loginBgImage} alt="login" />
-    </div>
+      <div className={styles.loginImage}>
+        <img src={loginBgImage} alt="login" />
+      </div>
   </div>
 )
 };
