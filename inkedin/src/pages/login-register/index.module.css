@@ -1,0 +1,108 @@
+/* Full screen container for the login */
+.loginWrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;  /* Horizontally centers the content */
+    align-items: center;  /* Vertically centers the content */
+    background: linear-gradient(to right, #1a191b 0%, #4f4f4f 100%);
+}
+
+/* Form wrapper with a smaller size and centering */
+.loginFormWrapper {
+    background-color: #ffffff;
+    width: 20%;  /* Fixed width for the form wrapper */
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 12rem;
+}
+
+/* Heading style */
+.loginForm h1 {
+    font-size: 2rem;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Style for input groups */
+.inputGroup {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.inputGroup label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.inputGroup input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Input focus effect */
+.inputGroup input:focus {
+    border-color: #91653d;
+    background-color: #f3d1b28f;
+    outline: none;
+}
+
+/* Button styling */
+.loginButton {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Button hover effect */
+.loginButton:hover {
+    background-color: #91653d;
+}
+
+/* Right image section */
+.loginImage {
+    width: 50vw;  /* Hide the image if not needed */
+    height: 100vh
+}
+
+/* Optional background image adjustment */
+.loginImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.loginButtonText {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.errorText {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+    max-width: 100%;
+    word-break: break-word;
+}  

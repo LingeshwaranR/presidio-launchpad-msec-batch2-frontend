@@ -1,7 +1,7 @@
 // src/pages/Home.tsx
 import { useState } from "react";
-import { DateFilter } from "../component/DateFilter";
-import CardContainer from "../component/CardContainer";
+import { DateFilter } from "../../component/DateFilter";
+import CardContainer from "../../component/CardContainer";
 
 const Home = () => {
   const [filterRange, setFilterRange] = useState<{
