@@ -49,7 +49,7 @@ const LoginScreen = () => {
     const newErrors: { email?: string; password?: string } = {};
   
     if (!email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Email ID is required";
     }
   
     if (!password.trim()) {
