@@ -5,7 +5,10 @@ import { ProtectedRoute } from "../routers/protected.route";
 import LoginScreen from "../pages/login-register/index";
 import { lazy } from "react";
 
-const HomeScreen = lazy(() => import("../pages/home/index"));
+const ExploreScreen = lazy(() => import("../pages/explore/index"));
+const MyBlogsScreen = lazy(() => import("../pages/my-blogs/index"));
+const MyFavouritesScreen = lazy(() => import("../pages/favourites/index"));
+
 
 // Application routes configuration
 export const ROUTE_CONFIG = [
@@ -13,10 +16,13 @@ export const ROUTE_CONFIG = [
     path: APP_ROUTES.ROOT,
     layout: Layout,
     guard: ProtectedRoute,
-    redirectTo: APP_ROUTES.HOME,
+    redirectTo: APP_ROUTES.EXPLORE,
     children: [
-        { path: APP_ROUTES.ROOT, element: HomeScreen },
-        { path: APP_ROUTES.HOME, element: HomeScreen }
+        { path: APP_ROUTES.ROOT, element: ExploreScreen },
+        { path: APP_ROUTES.EXPLORE, element: ExploreScreen },
+        { path: APP_ROUTES.MY_BLOGS, element: MyBlogsScreen },
+        { path: APP_ROUTES.MY_FAVOURITES, element: MyFavouritesScreen },
+
     ],
   },
   {

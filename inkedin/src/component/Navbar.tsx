@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 
 export const Navbar: React.FC = () => {
-  const { logout } = useAuth()
+  const { logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -12,8 +12,8 @@ export const Navbar: React.FC = () => {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const handleLogout = () => {
-    logout()
-  }
+    logout();
+  };
 
   return (
     <nav className="navbar">
@@ -22,14 +22,14 @@ export const Navbar: React.FC = () => {
       </div>
 
       <div className={`navbar-center ${menuOpen ? "active" : ""}`}>
-        <NavLink to="/" end onClick={() => setMenuOpen(false)}>
+        <NavLink to="/explore" end onClick={() => setMenuOpen(false)}>
           Explore
         </NavLink>
-        <NavLink to="/myblogs" onClick={() => setMenuOpen(false)}>
+        <NavLink to="/my_blogs" onClick={() => setMenuOpen(false)}>
           My Blogs
         </NavLink>
-        <NavLink to="/settings" onClick={() => setMenuOpen(false)}>
-          Settings
+        <NavLink to="/my_favourites" onClick={() => setMenuOpen(false)}>
+          Favourite
         </NavLink>
       </div>
 
@@ -39,7 +39,9 @@ export const Navbar: React.FC = () => {
           {dropdownOpen && (
             <div className="dropdown-menu">
               <div className="dropdown-item">Profile</div>
-              <div className="dropdown-item" onClick={handleLogout}>Logout</div>
+              <div className="dropdown-item" onClick={handleLogout}>
+                Logout
+              </div>
             </div>
           )}
         </div>

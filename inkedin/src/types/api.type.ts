@@ -1,0 +1,14 @@
+export interface Blog {
+    id: number;
+    title: string;
+    description: string;
+    image_url: string;
+    created_at: string;
+    updated_at: string;
+  }
+  
+  export interface ExploreBlogsResponse {
+    responseMessage: string;
+    exception: any;
+    responseData: Blog[];
+  }

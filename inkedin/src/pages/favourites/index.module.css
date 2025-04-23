@@ -1,0 +1,21 @@
+.explorePageContainer {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    /* background-color: #3d4041; */
+    background: linear-gradient(to bottom, #232526, #414345);
+  }
+
+  .cardContainer {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;            /* Allow wrapping to next row */
+    gap: 16px;
+    width: 100%;
+    overflow-y: auto;
+    padding: 24px;
+    box-sizing: border-box;
+    justify-content: center;
+  }

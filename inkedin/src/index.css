@@ -40,6 +40,7 @@ nav a:hover {
   overflow: hidden; /* no scroll unless you enable it inside subcontainers */
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .navbar {
@@ -52,6 +53,7 @@ nav a:hover {
   font-family: 'Segoe UI', sans-serif;
   position: relative;
   z-index: 10;
+  height: 5%;
   /* border-radius: 32px; */
 }
 
@@ -195,37 +197,11 @@ nav a:hover {
   background-color: #0056b3;
 }
 
-.home-page-results {
+.explore-page-results {
   display: flex;
   justify-content: center;
   gap: 6px;
   height:max-content;
-}
-
-.home-page-container {
-  display: flex;
-  flex-direction: column;
-  justify-content:space-between;
-  align-items: center;
-  height: 100%;
-}
-.home-page-card-container{
-  padding: 10px;
-  height: 79%;
-}
-
-.card-container {
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;            /* Allow wrapping to next row */
-  gap: 16px;
-  width: 100%;
-  overflow-y: auto;           /* Vertical scroll */
-  max-height: 80vh;           /* Adjust based on your layout */
-  padding-bottom: 10px;
-  padding-top: 10px;
-  box-sizing: border-box;
-  justify-content: flex-start; /* Align cards to the left */
 }
 
 .card {
@@ -234,13 +210,14 @@ nav a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 16px;
   width: 350px;
-  height: auto; /* Remove fixed height */
+  height: 375px;
   flex-shrink: 0;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  justify-content: space-between; /* Distribute space evenly between elements */
+  flex-direction: column;
+  justify-content: space-between;
 }
+
 
 .card-image {
   width: 100%;
@@ -254,6 +231,10 @@ nav a:hover {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 0px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card-description {
@@ -261,9 +242,8 @@ nav a:hover {
   color: #555;
   margin-bottom: 12px;
   overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Limits to 2 lines */
+  -webkit-line-clamp: 3; /* number of lines to show */
   -webkit-box-orient: vertical;
 }
 
