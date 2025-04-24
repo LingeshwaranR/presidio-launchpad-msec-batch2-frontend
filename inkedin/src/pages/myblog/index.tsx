@@ -22,7 +22,6 @@ const MyBlogsScreen = () => {
   }
 
   const handleDeleteClick = (blogId: number) => {
-    console.log("hello")
     api.delete(
       API_ENDPOINTS.PUBLISH_BLOG + `/${blogId}`, {
         headers: { Authorization: `Bearer ${authState.authToken}` }
