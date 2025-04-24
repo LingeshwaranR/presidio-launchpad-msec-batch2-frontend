@@ -1,4 +1,5 @@
 export const API_ENDPOINTS = {
+    REGISTER: "/api/auth/register",
     LOGIN: "/api/auth/login",
     GET_ALL_BLOGS: "/api/blog?explore=true",
     PUBLISH_BLOG: "/api/blog",

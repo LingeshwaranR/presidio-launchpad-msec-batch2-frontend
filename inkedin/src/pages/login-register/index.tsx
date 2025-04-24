@@ -4,84 +4,71 @@ import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../constants/route.constant";
 import styles from "./index.module.css";
 import loginBgImage from "../../assets/login.png";
-import { ArrowRight } from "@mynaui/icons-react";
+import { ArrowRight, UserPlus } from "@mynaui/icons-react";
 import { API_ENDPOINTS } from "../../constants/api.constants";
 import { api } from "../../configs/axios.config";
 import decodeJwt from "../../utils/jwtdecoder";
+import { ILoginRequest, ILoginResponse, IRegisterRequest, IRegisterResponse } from "../../types/app.type";
 
-
-const LoginScreen = () => {
+const LoginRegisterScreen = () => {
   const { login, authState } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [errors, setErrors] = useState<{ email?: string; password?: string; login?: string }>({});
-
-  const handleEmailChange = (email: string) => {
-    setEmail(email)
-  }
-
-  const handlePasswordChange = (password: string) => {
-    setPassword(password)
-  }
-
-  interface ILoginRequest {
-    email: string;
-    password: string;
-  }
-
-  interface ILoginResponse {
-    responseMessage: string;
-    exception: any;
-    responseData: {
-      token: string;
-    }
-  }
+  const [isLoginMode, setIsLoginMode] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [errors, setErrors] = useState<{ email?: string; password?: string; login?: string; username?: string }>({});
 
   useEffect(() => {
     if (authState.isAuthenticated) {
       navigate(APP_ROUTES.ROOT);
     }
   }, [authState.isAuthenticated]);
-    
 
   const handleLogin = async () => {
-    const newErrors: { email?: string; password?: string } = {};
-  
-    if (!email.trim()) {
-      newErrors.email = "Email ID is required";
-    }
-  
-    if (!password.trim()) {
-      newErrors.password = "Password is required";
-    }
-  
+    const newErrors: typeof errors = {};
+    if (!email.trim()) newErrors.email = "Email ID is required";
+    if (!password.trim()) newErrors.password = "Password is required";
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-  
-    // Clear previous errors
     setErrors({});
-
-    const payload: ILoginRequest = {
-      email: email,
-      password: password
-    }
+    const payload = { email, password };
     try {
-      const response = await api.post<ILoginResponse, ILoginRequest>(API_ENDPOINTS.LOGIN, payload, {
-        headers: {}
-      })
+      const response = await api.post<ILoginResponse, ILoginRequest>(API_ENDPOINTS.LOGIN, payload, {});
       if (response.data.exception == null) {
-        const user = decodeJwt(response.data.responseData.token ?? "")
+        const user = decodeJwt(response.data.responseData.token ?? "");
         login(response.data.responseData.token, user);
-      }
-      else {
-        alert(response.data.responseMessage)
+      } else {
+        alert(response.data.responseMessage);
       }
     } catch {
-      const loginError = {login: "Invalid Credentials. Please try again."}
-      setErrors(loginError)
+      setErrors({ login: "Invalid Credentials. Please try again." });
+    }
+  };
+
+  const handleRegister = async () => {
+    const newErrors: typeof errors = {};
+    if (!email.trim()) newErrors.email = "Email ID is required";
+    if (!username.trim()) newErrors.username = "Username is required";
+    if (!password.trim()) newErrors.password = "Password is required";
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
+    const payload = { email, username, password };
+    try {
+      const response = await api.post<IRegisterResponse, IRegisterRequest>(API_ENDPOINTS.REGISTER, payload, {});
+      if (response.data.exception == null && response.data.responseData.error != true) {
+        alert("Account created! Please login.");
+        setIsLoginMode(true);
+      } else {
+        setErrors({ login: "Something went wrong. Try again later." });
+      }
+    } catch {
+      setErrors({ login: "Something went wrong. Try again later." });
     }
   };
 
@@ -90,45 +77,71 @@ const LoginScreen = () => {
       <div className={styles.loginFormWrapper}>
         <div className={styles.loginForm}>
           <form>
-            <h2>Welcome Back to inkedin</h2>
+            <h2>{isLoginMode ? "Welcome Back to inkedin" : "Create Your Account"}</h2>
+            {!isLoginMode && (
+              <div className={styles.inputGroup}>
+                <label htmlFor="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                {errors.username && <div className={styles.errorText}>{errors.username}</div>}
+              </div>
+            )}
             <div className={styles.inputGroup}>
-              <label htmlFor="email">Enter Email ID</label>
+              <label htmlFor="email">Email ID</label>
               <input
                 type="email"
                 id="email"
-                name="email"
-                onChange={(e) => handleEmailChange(e.target.value)}
                 value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <div className={styles.errorText}>{errors.email && <span>{errors.email}</span>}</div>
+              {errors.email && <div className={styles.errorText}>{errors.email}</div>}
             </div>
- 
             <div className={styles.inputGroup}>
-              <label htmlFor="password">Enter Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 id="password"
-                name="password"
-                onChange={(e) => handlePasswordChange(e.target.value)}
                 value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <div className={styles.errorText}>{errors.password && <span className={styles.errorText}>{errors.password}</span>}</div>
+              {errors.password && <div className={styles.errorText}>{errors.password}</div>}
             </div>
-            <button type="button" onClick={handleLogin} className={styles.loginButton}>
+            <button
+              type="button"
+              className={styles.loginButton}
+              onClick={isLoginMode ? handleLogin : handleRegister}
+            >
               <div className={styles.loginButtonText}>
-                <div>Log In</div>
-                <ArrowRight size={24}/>
+                <div>{isLoginMode ? "Log In" : "Register"}</div>
+                {isLoginMode ? <ArrowRight size={24} /> : <UserPlus size={24} />}
               </div>
             </button>
-            <div className={styles.loginErrorText}>{errors.login && <span className={styles.errorText}>{errors.login}</span>}</div>
+            {errors.login && <div className={styles.errorText}>{errors.login}</div>}
+            <div className={styles.toggleModeText}>
+              {isLoginMode ? (
+                <>
+                  Don't have an account?{" "}
+                  <span onClick={() => setIsLoginMode(false)}>Register</span>
+                </>
+              ) : (
+                <>
+                  Already have an account?{" "}
+                  <span onClick={() => setIsLoginMode(true)}>Login</span>
+                </>
+              )}
+            </div>
           </form>
         </div>
       </div>
       <div className={styles.loginImage}>
         <img src={loginBgImage} alt="login" />
       </div>
-  </div>
-)
+    </div>
+  );
 };
 
-export default LoginScreen;
+export default LoginRegisterScreen;

@@ -12,3 +12,35 @@ export interface IBlog {
 export interface IBlogResponse {
     responseData: IBlog[];
 }
+
+export interface ILoginRequest {
+    email: string;
+    password: string;
+  }
+
+export interface ILoginResponse {
+    responseMessage: string;
+    exception: any;
+    responseData: {
+      token: string;
+    }
+}
+
+export interface IRegisterRequest {
+    email: string;
+    username: string;
+    password: string;
+}
+
+export interface IRegisterResponse {
+    responseMessage: string;
+    exception: any;
+    responseData: {
+        error?: boolean;
+        id: number;
+        email: string;
+        username: string;
+        password: string;
+        created_at: string;
+    }
+}

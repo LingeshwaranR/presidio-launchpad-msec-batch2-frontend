@@ -109,3 +109,18 @@
     max-width: 100%; 
     word-break: break-word;
 }
+
+.toggleModeText {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #ceb6a0cb;
+  }
+  
+  .toggleModeText span {
+    color: #91653d;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  
