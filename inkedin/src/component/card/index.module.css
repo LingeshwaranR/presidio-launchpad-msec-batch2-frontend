@@ -3,10 +3,9 @@
     height: 25.5rem;
     background-color: white;
     border-radius: 16px;
-    border: #dedddd solid 0.1rem;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 22px rgba(96, 96, 96, 0.15);
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.15);
 }
 
 .cardWrapper:hover {
@@ -81,10 +80,12 @@
 .cardEditButton:hover{
     background-color: rgb(255, 166, 1);
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .cardViewButton:hover {
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .cardEditIcon, .cardDeleteIcon {
@@ -108,6 +109,7 @@
 .cardDeleteButton:hover{
     background-color: rgb(255, 52, 1);
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .cardBody {
@@ -115,4 +117,25 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.cardImage {
+    position: relative; /* Important so that the absolute positioning works */
   }
+  
+  .favoriteIcon {
+    color: red;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5em;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 1;            /* make sure it's visible */
+    visibility: visible;   /* make sure it's visible */
+    transition: transform 0.2s ease;
+  }
+  
+  .favoriteIcon:hover {
+    transform: scale(1.1);
+  }
+  

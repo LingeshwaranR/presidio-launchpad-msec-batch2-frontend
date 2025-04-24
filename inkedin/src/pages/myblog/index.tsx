@@ -31,6 +31,22 @@ const MyBlogsScreen = () => {
     })
   }
 
+  const handleFavClick = async (isFavorited: boolean, blogId: number) => {
+    if (!isFavorited) {
+      await api.delete(
+        API_ENDPOINTS.FAVORITE + `/${blogId}`, {
+          headers: { Authorization: `Bearer ${authState.authToken}` }
+        }
+      )
+      return
+    }
+    await api.post(
+      API_ENDPOINTS.FAVORITE + `/${blogId}`, {}, {
+        headers: { Authorization: `Bearer ${authState.authToken}` }
+      }
+    )
+  }
+
   useEffect(() => {
     getMyBlogs()
   }, [])
@@ -53,9 +69,11 @@ const MyBlogsScreen = () => {
               imgURL={blog.image_url}
               isEditable={blog.user_id == authState.user.id ? true : false}
               isDeletable={blog.user_id == authState.user.id ? true : false}
+              isFavorited={blog.isFavourite}
               onEditClick={() => navigate(APP_ROUTES.BLOG, { state: { ...blog } })}
               onViewClick={() => navigate(APP_ROUTES.BLOG, { state: { ...blog, mode: "view" } })}
               onDeleteClick={() => handleDeleteClick(blog.id ?? 0)}
+              onFavClick={(isFavorited: boolean) => handleFavClick(isFavorited, blog.id ?? 0)}
             />
           </div>
         )

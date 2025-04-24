@@ -7,6 +7,7 @@ export interface IBlog {
     user_id?: number;
     created_at?: string;
     updated_at?: string;
+    isFavourite: boolean;
 }
 
 export interface IBlogResponse {

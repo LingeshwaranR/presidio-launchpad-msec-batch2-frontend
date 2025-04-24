@@ -38,7 +38,7 @@ export const Navbar: React.FC = () => {
           <FaUserCircle className="user-icon" onClick={toggleDropdown} />
           {dropdownOpen && (
             <div className="dropdown-menu">
-              <div className="dropdown-item">Profile</div>
+              {/* <div className="dropdown-item">Profile</div> */}
               <div className="dropdown-item" onClick={handleLogout}>Logout</div>
             </div>
           )}
