@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./index.module.css";
-import { Edit, EyeSolid, Heart } from "@mynaui/icons-react";
+import { Edit, EyeSolid, Trash } from "@mynaui/icons-react";
 
 interface CardProps {
   title: string;
   description: string;
   imgURL: string;
   isEditable: boolean;
-  onCardClick?: () => void;
+  isDeletable: boolean;
+  onEditClick?: () => void;
+  onViewClick?: () => void;
+  onDeleteClick?: () => void;
 }
 
 const CardComponent: React.FC<CardProps> = ({
@@ -15,26 +18,18 @@ const CardComponent: React.FC<CardProps> = ({
   description,
   imgURL,
   isEditable,
-  onCardClick
+  isDeletable,
+  onEditClick,
+  onViewClick,
+  onDeleteClick
 }) => {
-    const [fill, setFill] = useState<boolean>(false)
-    const handleFavoriteClick = () => {
-        console.log("Favorite clicked");
-        setFill(!fill)
-    };
-    const handleEditClick = () => {
-        console.log("Edit clicked");
-    };
-    const handleViewClick = () => {
-        console.log("View clicked");
-    };
   return (
     <div className={styles.cardWrapper}>
-      <div className={styles.cardImage} onClick={onCardClick}>
+      <div className={styles.cardImage}>
         <img src={imgURL} alt="cardImage" />
       </div>
       <div className={styles.cardBody}>
-      <div className={styles.cardContent} onClick={onCardClick}>
+      <div className={styles.cardContent}>
         <div className={styles.cardTitle}>
             <h3>{title}</h3>
         </div>
@@ -45,18 +40,23 @@ const CardComponent: React.FC<CardProps> = ({
       <div className={styles.cardAction} onClick={() => {}}>
         <div className={styles.cardEditViewAction}>
             {isEditable && (
-            <button className={styles.cardEditButton} onClick={handleEditClick}>
+            <button className={styles.cardEditButton} onClick={onEditClick}>
                 <div className={styles.cardEditText}>Edit</div>
-                <div className={styles.cardEditIcon}><Edit size={12}/></div>
+                <div className={styles.cardEditIcon}><Edit size={14}/></div>
             </button>
             )}
-            <button className={styles.cardViewButton} onClick={handleViewClick}>
+            <button className={styles.cardViewButton} onClick={onViewClick}>
                 <div className={styles.cardEditText}>View</div>
-                <div className={styles.cardEditIcon}><EyeSolid size={12}/></div>
+                <div className={styles.cardEditIcon}><EyeSolid size={14}/></div>
             </button>
         </div>
-        <div className={styles.cardFavIcon}>
-            <Heart size={32} color="red" onClick={handleFavoriteClick} fill={`${fill ? "red" : "white"}`}/>
+        <div className={styles.cardDeleteAction}>
+            {isDeletable && (
+            <button className={styles.cardDeleteButton} onClick={onDeleteClick}>
+              <div className={styles.cardDeleteText}>Delete</div>
+              <div className={styles.cardDeleteIcon}><Trash size={14}/></div>
+            </button>
+            )}
         </div>
       </div>
       </div>

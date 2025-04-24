@@ -25,6 +25,8 @@ export const api = {
     config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<T>> => apiClient.put(endpoint, body, config),
 
-  delete: <T>(endpoint: string): Promise<AxiosResponse<T>> =>
-    apiClient.delete(endpoint),
+  delete: <T>(
+    endpoint: string,
+    config?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<T>> => apiClient.delete(endpoint, config),
 };

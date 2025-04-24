@@ -7,6 +7,8 @@ import { lazy } from "react";
 
 const HomeScreen = lazy(() => import("../pages/home/index"));
 const BlogScreen = lazy(() => import("../pages/blog/index"));
+const MyBlogsScreen = lazy(() => import("../pages/myblog/index"));
+const MyFavoritesScreen = lazy(() => import("../pages/favorites/index"));
 
 // Application routes configuration
 export const ROUTE_CONFIG = [
@@ -18,7 +20,9 @@ export const ROUTE_CONFIG = [
     children: [
         { path: APP_ROUTES.ROOT, element: HomeScreen },
         { path: APP_ROUTES.HOME, element: HomeScreen },
-        { path: APP_ROUTES.BLOG, element: BlogScreen }
+        { path: APP_ROUTES.BLOG, element: BlogScreen },
+        { path: APP_ROUTES.MY_BLOGS, element: MyBlogsScreen },
+        { path: APP_ROUTES.FAVORITES, element: MyFavoritesScreen }
     ],
   },
   {

@@ -10,12 +10,12 @@ import { Plus } from "@mynaui/icons-react";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../constants/route.constant";
 
-const HomeScreen = () => {
+const MyBlogsScreen = () => {
   const { authState } = useAuth()
   const navigate  = useNavigate()
   const [blogs, setBlogs] = useState<IBlog[]>([])
-  const getAllBlogs = async () => {
-    const blogs = await api.get<IBlogResponse>(API_ENDPOINTS.GET_ALL_BLOGS, {
+  const getMyBlogs = async () => {
+    const blogs = await api.get<IBlogResponse>(API_ENDPOINTS.GET_MY_BLOGS, {
       headers: { Authorization: `Bearer ${authState.authToken}` }
     })
     setBlogs(blogs.data.responseData)
@@ -28,12 +28,12 @@ const HomeScreen = () => {
         headers: { Authorization: `Bearer ${authState.authToken}` }
       }
     ).then(() => {
-      getAllBlogs()
+      getMyBlogs()
     })
   }
 
   useEffect(() => {
-    getAllBlogs()
+    getMyBlogs()
   }, [])
 
   return (
@@ -66,4 +66,4 @@ const HomeScreen = () => {
   );
 }
 
-export default HomeScreen;
+export default MyBlogsScreen;

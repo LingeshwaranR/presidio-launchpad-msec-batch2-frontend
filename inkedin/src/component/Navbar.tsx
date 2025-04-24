@@ -28,8 +28,8 @@ export const Navbar: React.FC = () => {
         <NavLink to="/myblogs" onClick={() => setMenuOpen(false)}>
           My Blogs
         </NavLink>
-        <NavLink to="/settings" onClick={() => setMenuOpen(false)}>
-          Settings
+        <NavLink to="/favorites" onClick={() => setMenuOpen(false)}>
+          Favorites
         </NavLink>
       </div>
 
