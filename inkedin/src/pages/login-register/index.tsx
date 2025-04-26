@@ -7,7 +7,6 @@ import loginBgImage from "../../assets/login.png";
 import { ArrowRight, UserPlus } from "@mynaui/icons-react";
 import { API_ENDPOINTS } from "../../constants/api.constants";
 import { api } from "../../configs/axios.config";
-import decodeJwt from "../../utils/jwtdecoder";
 import { ILoginRequest, ILoginResponse, IRegisterRequest, IRegisterResponse } from "../../types/app.type";
 
 const LoginRegisterScreen = () => {
@@ -38,8 +37,7 @@ const LoginRegisterScreen = () => {
     try {
       const response = await api.post<ILoginResponse, ILoginRequest>(API_ENDPOINTS.LOGIN, payload, {});
       if (response.data.exception == null) {
-        const user = decodeJwt(response.data.responseData.token ?? "");
-        login(response.data.responseData.token, user);
+        login(response.data.responseData.token);
       } else {
         alert(response.data.responseMessage);
       }

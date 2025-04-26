@@ -8,6 +8,7 @@ export interface IBlog {
     created_at?: string;
     updated_at?: string;
     isFavourite: boolean;
+    isMyBlog: boolean;
 }
 
 export interface IBlogResponse {

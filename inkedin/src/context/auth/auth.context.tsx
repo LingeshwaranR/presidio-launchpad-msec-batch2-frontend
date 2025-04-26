@@ -3,13 +3,12 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 interface AuthState {
   isAuthenticated: boolean;
-  user?: any;
   authToken?: string; // <-- Add token here
 }
 
 interface AuthContextType {
   authState: AuthState;
-  login: (token: string, user?: any) => void;
+  login: (token: string) => void;
   logout: () => void;
 }
 
@@ -26,11 +25,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   });
 
-  const login = (token: string, user?: any) => {
+  const login = (token: string) => {
     const newState: AuthState = {
       isAuthenticated: true,
-      authToken: token,
-      user: user || undefined
+      authToken: token
     };
     setAuthState(newState);
     localStorage.setItem("auth", JSON.stringify(newState)); // Store full state

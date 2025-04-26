@@ -1,21 +1,7 @@
-.container {
-    justify-items: center;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    align-items: center;
-    justify-content: center;
-    overflow-y: scroll;
-    padding: 0 6rem;
-}
-
 .homeScreenWrapper {
     overflow-y: scroll;
     padding-bottom: 1rem;
     /* background: radial-gradient(circle,rgb(255, 255, 255) 0%, rgb(162, 161, 160) 100%); */
-}
-
-.cardsBody {
-    margin: 1rem 0;
 }
 
 .createBlogButtonContainer {

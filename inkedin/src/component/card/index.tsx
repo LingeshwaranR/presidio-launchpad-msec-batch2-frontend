@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./index.module.css";
 import { Edit, EyeSolid, Trash } from "@mynaui/icons-react";
 import { Heart, HeartSolid } from "@mynaui/icons-react"; // Hypothetical example – update based on your icon library
@@ -29,15 +29,20 @@ const CardComponent: React.FC<CardProps> = ({
   onFavClick
 }) => {
 
+  const [isBlogFavorite, setIsBlogFavorite] = useState(isFavorited)
+
   return (
     <div className={styles.cardWrapper}>
       <div className={styles.cardImage}>
         <img src={imgURL} alt="cardImage" />
-        <div className={styles.favoriteIcon} onClick={() => {if (onFavClick) onFavClick(!isFavorited)}}>
-          {isFavorited ? (
-            <HeartSolid size={32} color="red"/>
+        <div className={styles.favoriteIcon} onClick={() => {
+          if (onFavClick) onFavClick(!isBlogFavorite);
+          setIsBlogFavorite(!isBlogFavorite);
+        }}>
+          {isBlogFavorite ? (
+            <HeartSolid size={32}/>
           ) : (
-            <Heart size={32} color="red" fontWeight={800} fill="beige"/>
+            <Heart size={32} color="pink" fontWeight={800} fill="beige"/>
           )}
         </div>
       </div>
