@@ -63,11 +63,13 @@ const BlogListScreen = ({
       return;
     }
 
-    const from = fromDate ? new Date(fromDate) : null;
-    const to = toDate ? new Date(toDate) : null;
+    const from = fromDate ? new Date(fromDate).setUTCHours(0, 0, 0, 0) : null;
+
+    const to = toDate ? new Date(toDate).setUTCHours(23, 59, 59, 999) : null;
 
     const filtered = blogs.filter((blog) => {
-      const blogDate = new Date(blog.created_at ?? new Date());
+      const blogDate = new Date(blog.created_at ?? new Date()).getTime();
+
       if (from && blogDate < from) return false;
       if (to && blogDate > to) return false;
       return true;
