@@ -68,3 +68,27 @@
     cursor: pointer;
     transform: scale(1.05);
 }
+
+.emptyStateText{
+    font-size : 20px;
+    padding: 16px;
+ }
+ .emptyStateImage{
+     height: 200px;
+     width: 200px;
+ }
+ 
+ .emptyState{
+     height: 300px;
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+ }
+ 
+ .emptyStateImageDiv{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }

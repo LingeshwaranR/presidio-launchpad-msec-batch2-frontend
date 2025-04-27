@@ -7,6 +7,7 @@ import { IBlog } from "../../types/app.type";
 import { useAuth } from "../../context/auth/auth.context";
 import { useEffect, useState } from "react";
 import CardList from "../card-list";
+import emptyState from "../../assets/emptyState.png";
 
 interface BlogListScreenProps {
   fetchBlogs: () => Promise<IBlog[]>;
@@ -99,6 +100,7 @@ const BlogListScreen = ({
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
                 className={styles.dateInput}
+                min={fromDate}
               />
             </div>
           </div>
@@ -122,6 +124,21 @@ const BlogListScreen = ({
         }
         onEditClick={(blog) => navigate("/blog", { state: { ...blog } })}
       />
+      {filteredBlogs.length === 0 && (
+        <div className={styles.emptyState}>
+          <div className={styles.emptyStateImageDiv}>
+            <img
+              className={styles.emptyStateImage}
+              src={emptyState}
+              alt="login"
+            />
+          </div>
+          <p className={styles.emptyStateText}>
+            There is no blog available to show, Hey but you can create one! by
+            clicking on the New Blog button.
+          </p>
+        </div>
+      )}
     </div>
   );
 };
